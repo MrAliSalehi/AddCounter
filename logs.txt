@@ -1,0 +1,83 @@
+2022-04-19 14:33:02.496 +04:30 [INF] Bot Started With : teoskofoskefkookefkobot
+2022-04-19 14:33:02.565 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-19 14:33:02.566 +04:30 [INF] Hosting environment: Development
+2022-04-19 14:33:02.566 +04:30 [INF] Content root path: D:\Projects\C#\Templates\AddCounter
+2022-04-19 14:33:41.060 +04:30 [INF] Bot Started With : teoskofoskefkookefkobot
+2022-04-19 14:33:41.127 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-19 14:33:41.129 +04:30 [INF] Hosting environment: Development
+2022-04-19 14:33:41.129 +04:30 [INF] Content root path: D:\Projects\C#\Templates\AddCounter
+2022-07-03 14:36:17.544 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:36:17.619 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 14:36:17.621 +04:30 [INF] Hosting environment: Development
+2022-07-03 14:36:17.621 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 14:36:54.552 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:36:54.624 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 14:36:54.626 +04:30 [INF] Hosting environment: Development
+2022-07-03 14:36:54.626 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 14:37:37.196 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:40:59.218 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:40:59.304 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 14:40:59.307 +04:30 [INF] Hosting environment: Development
+2022-07-03 14:40:59.308 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 14:41:51.228 +04:30 [ERR] AddGroupAsync
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'NOT NULL constraint failed: Groups.WelcomeMessage'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AddCounter.DataLayer.Controllers.GroupController.AddGroupAsync(Int64 groupId, CancellationToken ct) in D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter\DataLayer\Controllers\GroupController.cs:line 22
+   at AddCounter.DataLayer.Controllers.GroupController.AddGroupAsync(Int64 groupId, CancellationToken ct) in D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter\DataLayer\Controllers\GroupController.cs:line 23
+2022-07-03 14:43:00.447 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:43:00.532 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 14:43:00.535 +04:30 [INF] Hosting environment: Development
+2022-07-03 14:43:00.536 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 14:58:41.063 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 14:58:41.147 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 14:58:41.150 +04:30 [INF] Hosting environment: Development
+2022-07-03 14:58:41.151 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:02:50.884 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:02:50.968 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:02:50.971 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:02:50.972 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:03:20.635 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:03:20.720 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:03:20.724 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:03:20.725 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:04:06.293 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:04:06.382 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:04:06.388 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:04:06.390 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:09:05.149 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:09:05.233 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:09:05.236 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:09:05.237 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:09:57.069 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:09:57.157 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:09:57.160 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:09:57.161 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:11:14.722 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:11:14.812 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:11:14.815 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:11:14.816 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:12:41.388 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:12:41.475 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:12:41.479 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:12:41.479 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 15:15:07.912 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 15:15:07.996 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 15:15:08.000 +04:30 [INF] Hosting environment: Development
+2022-07-03 15:15:08.001 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
