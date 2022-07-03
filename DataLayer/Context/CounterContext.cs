@@ -6,6 +6,7 @@ namespace AddCounter.DataLayer.Context;
 public class CounterContext : DbContext
 {
     public DbSet<Group> Groups { get; set; } = default;
+    public DbSet<User> Users { get; set; } = default;
 
     private readonly ILoggerFactory _loggerFactory;
 

@@ -81,3 +81,67 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving 
 2022-07-03 15:15:07.996 +04:30 [INF] Application started. Press Ctrl+C to shut down.
 2022-07-03 15:15:08.000 +04:30 [INF] Hosting environment: Development
 2022-07-03 15:15:08.001 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 16:25:34.368 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 16:25:34.458 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 16:25:34.462 +04:30 [INF] Hosting environment: Development
+2022-07-03 16:25:34.463 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 16:27:18.287 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 16:27:18.374 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 16:27:18.376 +04:30 [INF] Hosting environment: Development
+2022-07-03 16:27:18.378 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 16:30:01.743 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 16:30:01.833 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 16:30:01.836 +04:30 [INF] Hosting environment: Development
+2022-07-03 16:30:01.838 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 16:30:45.595 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 16:30:45.684 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 16:30:45.688 +04:30 [INF] Hosting environment: Development
+2022-07-03 16:30:45.689 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:05:32.566 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:05:32.650 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:05:32.653 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:05:32.655 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:05:47.606 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:05:47.694 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:05:47.697 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:05:47.698 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:07:48.812 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:07:48.898 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:07:48.901 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:07:48.901 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:11:01.409 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:11:01.496 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:11:01.499 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:11:01.501 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:27:04.644 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:27:04.729 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:27:04.732 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:27:04.733 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:48:28.509 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:48:28.595 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:48:28.598 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:48:28.599 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:51:07.955 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:51:08.040 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:51:08.044 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:51:08.045 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 17:51:29.996 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 17:51:30.080 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 17:51:30.084 +04:30 [INF] Hosting environment: Development
+2022-07-03 17:51:30.085 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 18:05:03.003 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 18:05:03.094 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 18:05:03.097 +04:30 [INF] Hosting environment: Development
+2022-07-03 18:05:03.099 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 18:07:15.958 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 18:07:16.047 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 18:07:16.050 +04:30 [INF] Hosting environment: Development
+2022-07-03 18:07:16.051 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 18:09:28.596 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 18:09:28.688 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 18:09:28.692 +04:30 [INF] Hosting environment: Development
+2022-07-03 18:09:28.693 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 18:11:25.427 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 18:11:25.518 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 18:11:25.521 +04:30 [INF] Hosting environment: Development
+2022-07-03 18:11:25.522 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter

@@ -67,4 +67,30 @@ internal static class GroupController
             return 1;
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="chatId"></param>
+    /// <param name="ct"></param>
+    /// <returns>0 on success , 1 if not exists and 2 on error</returns>
+    public static async ValueTask<ushort> ResetGroupSettingAsync(long chatId, CancellationToken ct = default)
+    {
+        try
+        {
+            await using var db = new CounterContext();
+            var group = await db.Groups.FirstOrDefaultAsync(p => p.GroupId == chatId, ct);
+            if (group is null)
+                return 1;
+            group.RequiredAddCount = 0;
+            group.WelcomeMessage = "";
+            group.AddPrice = 0;
+            await db.SaveChangesAsync(ct);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(ResetGroupSettingAsync));
+            return 2;
+        }
+    }
 }
