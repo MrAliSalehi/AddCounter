@@ -7,5 +7,6 @@ public class Group
     public string WelcomeMessage { get; set; } = "";
     public int RequiredAddCount { get; set; }
     public long AddPrice { get; set; }
+    public ushort MessageDeleteTimeInMinute { get; set; } = 5;
 
 }

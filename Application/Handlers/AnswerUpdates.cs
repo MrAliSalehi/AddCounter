@@ -31,6 +31,7 @@ internal static class AnswerUpdates
             { } msg when (msg.StartsWith("wlc")) => client.CommandSetWelcomeMessageAsync(message, ct),
             { } msg when (msg.StartsWith("count")) => client.CommandSetAddCountAsync(message, ct),
             { } msg when (msg.StartsWith("price")) => client.CommandSetAddPriceAsync(message, ct),
+            { } msg when (msg.StartsWith("del tm")) => client.CommandSetMessageDeleteTimeAsync(message, ct),
 
             _ => Task.CompletedTask
         };
@@ -47,7 +48,8 @@ internal static class AnswerUpdates
         {
             var name = user.Username is null or "" ? user.FirstName : $"@{user.Username}";
             var welcomeMessage = group.WelcomeMessage is null or "" ? "Welcome" : group.WelcomeMessage;
-            await client.SendTextMessageAsync(chatId, $"{name}\n{welcomeMessage}", cancellationToken: ct);
+            var msg1 = await client.SendTextMessageAsync(chatId, $"{name}\n{welcomeMessage}", cancellationToken: ct);
+
         }
         if (from is not null && newUsers.All(p => p.Id != from.Id))
         {

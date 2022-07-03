@@ -2,6 +2,7 @@
 using AddCounter.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AddCounter.Migrations
 {
     [DbContext(typeof(CounterContext))]
-    partial class CounterContextModelSnapshot : ModelSnapshot
+    [Migration("20220703141809_deletemessagetime")]
+    partial class deletemessagetime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -28,8 +30,9 @@ namespace AddCounter.Migrations
                     b.Property<long>("GroupId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<ushort>("MessageDeleteTimeInMinute")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("MessageDeleteTimeInMinute")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("RequiredAddCount")
                         .HasColumnType("INTEGER");
