@@ -21,6 +21,7 @@ host.ConfigureServices((context, services) =>
     context.Configuration.Bind(config.Key, Globals.BotConfigs);
     Globals.Configuration = context.Configuration;
     services.AddHostedService<UpdateService>();
+    services.AddHostedService<RemoveMessageService>();
 });
 
 host.InjectSerilog();

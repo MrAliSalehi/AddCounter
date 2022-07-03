@@ -264,6 +264,55 @@ internal static class AdminCommands
 
 
     }
+    public static async Task CommandDeleteGroupAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+
+            var result = await GroupController.RemoveGroupAsync(message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Group Removed SuccessFully",
+                1 => "Group Is Not Created!",
+                _ => "Cannot Remove Group!"
+            };
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandDeleteGroupAsync));
+        }
+    }
+    public static async Task CommandBotStateAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.BotStatus = message.Text is not "off" and "on";
+
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Bot Updated",
+                _ => "Cannot Update The Bot Status"
+            };
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandBotStateAsync));
+        }
+    }
     public static async ValueTask<Group?> ValidateGroupAsync(ITelegramBotClient client, Message message, CancellationToken ct = default)
     {
         try

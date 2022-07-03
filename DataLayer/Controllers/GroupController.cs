@@ -93,4 +93,28 @@ internal static class GroupController
             return 2;
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="groupId"></param>
+    /// <param name="ct"></param>
+    /// <returns>0 on success . 1 if not exists and 2 on error</returns>
+    public static async ValueTask<ushort> RemoveGroupAsync(long groupId, CancellationToken ct = default)
+    {
+        try
+        {
+            await using var db = new CounterContext();
+            var group = await db.Groups.FirstOrDefaultAsync(p => p.GroupId == groupId, ct);
+            if (group is null)
+                return 1;
+            db.Groups.Remove(group);
+            await db.SaveChangesAsync(ct);
+            return 0;
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(RemoveGroupAsync));
+            return 2;
+        }
+    }
 }

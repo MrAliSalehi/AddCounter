@@ -8,5 +8,5 @@ public class Group
     public int RequiredAddCount { get; set; }
     public long AddPrice { get; set; }
     public ushort MessageDeleteTimeInMinute { get; set; } = 5;
-
+    public bool BotStatus { get; set; } = true;
 }

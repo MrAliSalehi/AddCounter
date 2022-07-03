@@ -1,5 +1,7 @@
 ﻿using AddCounter.Application.Commands;
+using AddCounter.Application.Services;
 using AddCounter.DataLayer.Controllers;
+using AddCounter.DataLayer.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -24,6 +26,8 @@ internal static class AnswerUpdates
         {
             "check" => Task.Run(() => AdminCommands.ValidateGroupAsync(client, message, ct), ct),
             "create" => client.CommandCreateGroupAsync(message, ct),
+            "delete" => client.CommandDeleteGroupAsync(message, ct),
+            "off" or "on" => client.CommandBotStateAsync(message, ct),
             "info" => client.CommandInfoOfAddAsync(message, ct),
             "res usr" => client.CommandResetUserAddsAsync(message, ct),
             "res gp" => client.CommandResetGroupSettingAsync(message, ct),
@@ -43,13 +47,15 @@ internal static class AnswerUpdates
         var group = await GroupController.GetGroupAsync(chatId, ct);
         if (group is null)
             return;
-
+        if (!group.BotStatus)
+            return;
+        
         foreach (var user in newUsers)
         {
             var name = user.Username is null or "" ? user.FirstName : $"@{user.Username}";
             var welcomeMessage = group.WelcomeMessage is null or "" ? "Welcome" : group.WelcomeMessage;
             var msg1 = await client.SendTextMessageAsync(chatId, $"{name}\n{welcomeMessage}", cancellationToken: ct);
-
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(chatId, msg1.MessageId, group.MessageDeleteTimeInMinute));
         }
         if (from is not null && newUsers.All(p => p.Id != from.Id))
         {
@@ -70,7 +76,9 @@ internal static class AnswerUpdates
                     $"Your Total Add Price until now Is [<b>${totalPrice}</b>]",
                 _ => "Cant Store Your Data. Please Contact Admins!"
             };
-            await client.SendTextMessageAsync(chatId, response, ParseMode.Html, cancellationToken: ct);
+            var msg2 = await client.SendTextMessageAsync(chatId, response, ParseMode.Html, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(chatId, msg2.MessageId, group.MessageDeleteTimeInMinute));
+
         }
     }
 }

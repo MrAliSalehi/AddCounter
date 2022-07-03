@@ -15,7 +15,6 @@ namespace AddCounter.Application.Services
         {
             var me = await _client.GetMeAsync(cancellationToken).ConfigureAwait(false);
             Log.Information("Bot Started With : {0}", me.Username);
-
             await base.StartAsync(cancellationToken).ConfigureAwait(false);
         }
 
