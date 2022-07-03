@@ -21,12 +21,9 @@ internal static class AnswerUpdates
         {
             "check" => Task.Run(() => AdminCommands.ValidateGroupAsync(client, message, ct), ct),
             "create" => client.CommandCreateGroupAsync(message, ct),
-            "check groups" => client.CommandCheckGroupsAsync(message, ct),
             { } msg when (msg.StartsWith("wlc")) => client.CommandSetWelcomeMessageAsync(message, ct),
             { } msg when (msg.StartsWith("count")) => client.CommandSetAddCountAsync(message, ct),
 
-            { } msg when (msg.StartsWith("add link")) => client.CommandAddLinkAsync(message, ct),
-            { } msg when (msg.StartsWith("rem link")) => client.CommandRemoveLinkAsync(message, ct),
             _ => Task.CompletedTask
         };
 

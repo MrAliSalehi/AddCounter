@@ -6,7 +6,6 @@ namespace AddCounter.DataLayer.Context;
 public class CounterContext : DbContext
 {
     public DbSet<Group> Groups { get; set; } = default;
-    public DbSet<Link> Links { get; set; } = default;
 
     private readonly ILoggerFactory _loggerFactory;
 
@@ -23,17 +22,4 @@ public class CounterContext : DbContext
         _ = options.UseSqlite($"Data Source={DbPath}");
     }
 
-    /// <inheritdoc />
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Group>(p =>
-        {
-            p.HasMany(x => x.GroupLinks);
-        });
-        modelBuilder.Entity<Link>(p =>
-        {
-            p.HasOne(a => a.Group).WithMany(x => x.GroupLinks);
-        });
-        base.OnModelCreating(modelBuilder);
-    }
 }

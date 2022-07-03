@@ -1,5 +1,4 @@
 ﻿using AddCounter.DataLayer.Controllers;
-using System.Text;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -67,60 +66,6 @@ internal static class AdminCommands
             _ => "Cannot Update The Group!",
         };
         _ = await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
-    }
-    public static async Task CommandAddLinkAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
-    {
-        var validate = await ValidateGroupAsync(client, message, ct);
-        if (!validate)
-            return;
-        var link = message.Text?.Replace("add link ", "");
-        if (link is null or "")
-        {
-            _ = await client.SendTextMessageAsync(message.Chat.Id, "Link Cannot Be Empty", cancellationToken: ct);
-            return;
-        }
-
-        var result = await LinkController.AddLinkAsync(message.Chat.Id, link, ct);
-        var response = result switch
-        {
-            0 => "Link Added SuccessFully",
-            1 => "Link Already Exists",
-            _ => "Cannot Add Link!"
-        };
-        _ = await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
-    }
-    public static async Task CommandRemoveLinkAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
-    {
-        var validate = await ValidateGroupAsync(client, message, ct);
-        if (!validate)
-            return;
-
-        var link = message.Text?.Replace("rem link ", "");
-        if (link is null or "")
-        {
-            _ = await client.SendTextMessageAsync(message.Chat.Id, "Link Cannot Be Empty", cancellationToken: ct);
-            return;
-        }
-        var result = await LinkController.RemoveLinkAsync(message.Chat.Id, link, ct);
-        var response = result switch
-        {
-            0 => "Link Removed SuccessFully",
-            1 => "Not Found",
-            _ => "Cannot Remove The Link!"
-        };
-        await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
-    }
-
-    public static async Task CommandCheckGroupsAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
-    {
-        var getGroupsWithLink = await LinkController.GetAllLinksAsync(message.Chat.Id, ct);
-        var builder = new StringBuilder();
-
-        foreach (var link in getGroupsWithLink)
-        {
-            builder.Append($"{link.Id}.{link.Url}");
-        }
-
     }
 
     public static async ValueTask<bool> ValidateGroupAsync(ITelegramBotClient client, Message message, CancellationToken ct = default)
