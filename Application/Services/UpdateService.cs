@@ -26,7 +26,7 @@ namespace AddCounter.Application.Services
                 {
                     var updateHandler = update switch
                     {
-                        { Message.NewChatMembers: not null } => client.HandleChatMemberAsync(update.Message.NewChatMembers, update.Message.From, update.Message.Chat.Id, ct),
+                        { Message.NewChatMembers: not null } => client.HandleChatMemberAsync(update.Message.NewChatMembers, update.Message.From, update.Message.Chat.Id, update.Message.Chat.Title!, ct),
 
                         { Message: not null } => client.HandleMessagesAsync(update.Message, ct),
 

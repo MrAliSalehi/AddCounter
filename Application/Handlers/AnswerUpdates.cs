@@ -11,6 +11,9 @@ namespace AddCounter.Application.Handlers;
 
 internal static class AnswerUpdates
 {
+    //todo fake detection
+    //todo payadmin
+    //todo bulkon -> disable notify message for add 
     internal static async Task HandleMessagesAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
     {
         if (message.Text is null)
@@ -32,6 +35,7 @@ internal static class AnswerUpdates
             "res usr" => client.CommandResetUserAddsAsync(message, ct),
             "res gp" => client.CommandResetGroupSettingAsync(message, ct),
             "gp id" => client.CommandGroupIdAsync(message, ct),
+            "hide name" or "show name" => client.CommandUserNameVisibilityAsync(message, ct),
             { } msg when (msg.StartsWith("wlc")) => client.CommandSetWelcomeMessageAsync(message, ct),
             { } msg when (msg.StartsWith("count")) => client.CommandSetAddCountAsync(message, ct),
             { } msg when (msg.StartsWith("price")) => client.CommandSetAddPriceAsync(message, ct),
@@ -42,14 +46,14 @@ internal static class AnswerUpdates
         await action.ConfigureAwait(false);
     }
 
-    internal static async Task HandleChatMemberAsync(this ITelegramBotClient client, User[] newUsers, User? from, long chatId, CancellationToken ct = default)
+    internal static async Task HandleChatMemberAsync(this ITelegramBotClient client, User[] newUsers, User? from, long chatId, string chatName, CancellationToken ct = default)
     {
         var group = await GroupController.GetGroupAsync(chatId, ct);
         if (group is null)
             return;
         if (!group.BotStatus)
             return;
-        
+
         foreach (var user in newUsers)
         {
             var name = user.Username is null or "" ? user.FirstName : $"@{user.Username}";
@@ -60,6 +64,8 @@ internal static class AnswerUpdates
         if (from is not null && newUsers.All(p => p.Id != from.Id))
         {
             var fromName = from.Username is null or "" ? from.FirstName : $"@{from.Username}";
+            if (group.HideName)
+                fromName = "USERNAME_IS_HIDDEN";
             var getUser = await UserController.GetUserAsync(from.Id, chatId, ct);
             var result = await UserController.UpdateUserAsync(from.Id, chatId, p =>
             {
@@ -69,7 +75,7 @@ internal static class AnswerUpdates
             var totalPrice = group.AddPrice * totalAdds;
             var response = result switch
             {
-                0 => $"User {fromName} in Group[<i>{getUser.ChatId}</i>]\n" +
+                0 => $"User {fromName} in Group[<i>{chatName}</i>]\n" +
                     $"You Added <b>{getUser.AddCount}</b> Members Before.\n" +
                     $"Now You Added <b>{newUsers.Length}</b> More Users\n" +
                     $"You Need <b>{group.RequiredAddCount - (totalAdds)}</b> More To Get Paid.\n" +

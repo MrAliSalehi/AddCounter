@@ -146,7 +146,7 @@ internal static class AdminCommands
             var users = await UserController.GetUserByGroupIdAsync(message.Chat.Id, ct);
             uint totalAdds = 0;
             var builder = new StringBuilder();
-
+            builder.Append($"Information For Group [{message.Chat.Title}]({message.Chat.Id})\n");
             foreach (var user in users)
             {
                 builder.Append($"User [{user.UserId}] Added [<b>{user.AddCount}</b>]\n");
@@ -303,6 +303,32 @@ internal static class AdminCommands
             {
                 0 => "Bot Updated",
                 _ => "Cannot Update The Bot Status"
+            };
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandBotStateAsync));
+        }
+    }
+    public static async Task CommandUserNameVisibilityAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.HideName = message.Text!.Contains("hide") || !message.Text.Contains("show");
+
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Bot Updated",
+                _ => "Cannot Update The Bot."
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));

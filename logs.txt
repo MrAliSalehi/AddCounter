@@ -165,3 +165,7 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving 
 2022-07-03 21:35:32.081 +04:30 [INF] Application started. Press Ctrl+C to shut down.
 2022-07-03 21:35:32.085 +04:30 [INF] Hosting environment: Development
 2022-07-03 21:35:32.086 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-03 21:47:39.467 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-03 21:47:39.555 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-03 21:47:39.559 +04:30 [INF] Hosting environment: Development
+2022-07-03 21:47:39.561 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter

@@ -9,4 +9,5 @@ public class Group
     public long AddPrice { get; set; }
     public ushort MessageDeleteTimeInMinute { get; set; } = 5;
     public bool BotStatus { get; set; } = true;
+    public bool HideName { get; set; } = false;
 }
