@@ -177,3 +177,67 @@ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving 
 2022-07-04 14:04:23.388 +04:30 [INF] Application started. Press Ctrl+C to shut down.
 2022-07-04 14:04:23.392 +04:30 [INF] Hosting environment: Development
 2022-07-04 14:04:23.393 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:11:06.537 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:11:06.626 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:11:06.629 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:11:06.630 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:20:32.858 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:20:32.949 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:20:32.952 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:20:32.953 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:24:58.271 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:24:58.384 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:24:58.387 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:24:58.387 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:25:45.071 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:25:45.163 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:25:45.165 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:25:45.166 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:35:05.858 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:35:05.945 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:35:05.948 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:35:05.949 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 14:36:22.323 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 14:36:22.407 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 14:36:22.411 +04:30 [INF] Hosting environment: Development
+2022-07-04 14:36:22.412 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 15:09:23.376 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 15:09:23.460 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 15:09:23.463 +04:30 [INF] Hosting environment: Development
+2022-07-04 15:09:23.464 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 15:09:33.288 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 15:09:33.331 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 15:09:33.334 +04:30 [INF] Hosting environment: Development
+2022-07-04 15:09:33.335 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 15:09:45.380 +04:30 [ERR] OnError
+Telegram.Bot.Exceptions.ApiRequestException: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+   at Telegram.Bot.TelegramBotClient.MakeRequestAsync[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at Telegram.Bot.Polling.DefaultUpdateReceiver.ReceiveAsync(IUpdateHandler updateHandler, CancellationToken cancellationToken)
+2022-07-04 15:09:54.127 +04:30 [ERR] OnError
+Telegram.Bot.Exceptions.ApiRequestException: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+   at Telegram.Bot.TelegramBotClient.MakeRequestAsync[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at Telegram.Bot.Polling.DefaultUpdateReceiver.ReceiveAsync(IUpdateHandler updateHandler, CancellationToken cancellationToken)
+2022-07-04 15:09:57.488 +04:30 [ERR] OnError
+Telegram.Bot.Exceptions.ApiRequestException: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+   at Telegram.Bot.TelegramBotClient.MakeRequestAsync[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at Telegram.Bot.Polling.DefaultUpdateReceiver.ReceiveAsync(IUpdateHandler updateHandler, CancellationToken cancellationToken)
+2022-07-04 15:10:00.817 +04:30 [ERR] OnError
+Telegram.Bot.Exceptions.ApiRequestException: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+   at Telegram.Bot.TelegramBotClient.MakeRequestAsync[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at Telegram.Bot.Polling.DefaultUpdateReceiver.ReceiveAsync(IUpdateHandler updateHandler, CancellationToken cancellationToken)
+2022-07-04 15:10:04.850 +04:30 [ERR] OnError
+Telegram.Bot.Exceptions.ApiRequestException: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+   at Telegram.Bot.TelegramBotClient.MakeRequestAsync[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at Telegram.Bot.Polling.DefaultUpdateReceiver.ReceiveAsync(IUpdateHandler updateHandler, CancellationToken cancellationToken)
+2022-07-04 15:10:14.780 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 15:10:14.824 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 15:10:14.828 +04:30 [INF] Hosting environment: Development
+2022-07-04 15:10:14.828 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 15:10:25.638 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 15:10:25.727 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 15:10:25.730 +04:30 [INF] Hosting environment: Development
+2022-07-04 15:10:25.731 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter
+2022-07-04 15:17:27.553 +04:30 [INF] Bot Started With : AddCounterDemoBot
+2022-07-04 15:17:27.588 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-04 15:17:27.590 +04:30 [INF] Hosting environment: Development
+2022-07-04 15:17:27.590 +04:30 [INF] Content root path: D:\Projects\C#\TelegramProducts\BotApi\AddCounter\AddCounter

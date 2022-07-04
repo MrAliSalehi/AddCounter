@@ -1,6 +1,7 @@
 using AddCounter.Application.Services;
 using AddCounter.Common.Extensions;
 using AddCounter.Common.Models;
+using Serilog;
 
 var host = Host.CreateDefaultBuilder(args);
 
@@ -23,7 +24,15 @@ host.ConfigureServices((context, services) =>
     services.AddHostedService<UpdateService>();
     services.AddHostedService<RemoveMessageService>();
 });
+try
+{
+    host.InjectSerilog();
 
-host.InjectSerilog();
-
-await host.Build().RunAsync();
+    await host.Build().RunAsync();
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+    Log.Error(e, nameof(Program));
+    Console.ReadKey();
+}

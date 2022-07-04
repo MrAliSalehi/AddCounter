@@ -21,7 +21,7 @@ internal static class AdminCommands
             var canParse = ushort.TryParse(message.Text?.Replace("del tm ", ""), out var time);
             if (!canParse)
             {
-                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "Time Cannot be Empty", cancellationToken: ct);
+                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "زمان نباید خالی باشد", cancellationToken: ct);
                 RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId));
                 return;
             }
@@ -29,8 +29,8 @@ internal static class AdminCommands
             var result = await GroupController.UpdateGroupAsync(p => p.MessageDeleteTimeInMinute = time, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Time Updated SuccessFully",
-                _ => "Cannot Update Time."
+                0 => "زمان اپدیت شد.",
+                _ => "نمیشه"
             };
             var msg2 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg2.MessageId, time));
@@ -49,7 +49,7 @@ internal static class AdminCommands
             var getGroup = await GroupController.GetGroupAsync(message.Chat.Id, ct);
             if (getGroup is not null)
             {
-                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "<i>Group Is Already Created</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
+                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "<i>گروه از قبل ساخته شده</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
                 RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, getGroup.MessageDeleteTimeInMinute));
                 return;
             }
@@ -57,8 +57,8 @@ internal static class AdminCommands
             var result = await GroupController.AddGroupAsync(message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Group Created SuccessFully",
-                _ => "Can't Create Group Right Now!",
+                0 => "گروه ساخته شد",
+                _ => "نمیشه",
             };
             var msg2 = await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg2.MessageId));
@@ -81,7 +81,7 @@ internal static class AdminCommands
             var welcomeMessage = message.Text?.Replace("wlc ", "");
             if (welcomeMessage is null or "")
             {
-                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "Welcome Message Cannot be Empty", cancellationToken: ct);
+                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "پیام نمیتواند خالی باشد", cancellationToken: ct);
                 RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
 
                 return;
@@ -91,8 +91,8 @@ internal static class AdminCommands
                 await GroupController.UpdateGroupAsync(p => p.WelcomeMessage = welcomeMessage, message.Chat.Id, ct);
             var response = updateResult switch
             {
-                0 => "Group Updated SuccessFully.",
-                _ => "Cannot Update The Group."
+                0 => "گروه اپدیت شد",
+                _ => "نمیشه"
             };
             var msg2 = await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg2.MessageId, validate.MessageDeleteTimeInMinute));
@@ -114,7 +114,7 @@ internal static class AdminCommands
             var isNumber = int.TryParse(message.Text?.Replace("count ", ""), out var addCount);
             if (!isNumber)
             {
-                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "Add number Cannot Be Empty", cancellationToken: ct);
+                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "تعداد نمیتواند خالی باشد", cancellationToken: ct);
                 RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
 
                 return;
@@ -123,8 +123,8 @@ internal static class AdminCommands
             var updateResult = await GroupController.UpdateGroupAsync(p => p.RequiredAddCount = addCount, message.Chat.Id, ct);
             var response = updateResult switch
             {
-                0 => "Group Updated SuccessFully",
-                _ => "Cannot Update The Group!",
+                0 => "گروه اپدیت شد",
+                _ => "نمیشه",
             };
             var msg2 = await client.SendTextMessageAsync(message.Chat.Id, $"<i>{response}</i>", ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg2.MessageId, validate.MessageDeleteTimeInMinute));
@@ -146,19 +146,22 @@ internal static class AdminCommands
             var users = await UserController.GetUserByGroupIdAsync(message.Chat.Id, ct);
             uint totalAdds = 0;
             var builder = new StringBuilder();
-            builder.Append($"Information For Group [{message.Chat.Title}]({message.Chat.Id})\n");
+            builder.Append($"اطلاعات برای گروه [{message.Chat.Title}]\n");
             foreach (var user in users)
             {
-                builder.Append($"User [{user.UserId}] Added [<b>{user.AddCount}</b>]\n");
+                builder.Append($"[کاربر](tg://user?id={user.UserId}) اضافه کرد [{user.AddCount}] نفر\n");
                 totalAdds += user.AddCount;
             }
 
-            builder.Append($"\nTotal Adds:{totalAdds}");
+            builder.Append($"\nمجموع اد ها:{totalAdds}");
 
-            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "<i>Details Has Been Sent To Your Pv.</i>", ParseMode.Html,
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "<i>اطلاعات به پیوی ارسال شد.</i>", ParseMode.Html,
                 replyToMessageId: message.MessageId, cancellationToken: ct).ConfigureAwait(false);
 
-            await client.SendTextMessageAsync(message.From!.Id, builder.ToString(), ParseMode.Html, cancellationToken: ct).ConfigureAwait(false);
+            await client.SendTextMessageAsync(message.From!.Id, builder.ToString(),
+                ParseMode.MarkdownV2,
+                cancellationToken: ct)
+                .ConfigureAwait(false);
 
             await client.DeleteMessageAsync(message.Chat.Id, message.MessageId, ct).ConfigureAwait(false);
 
@@ -180,8 +183,8 @@ internal static class AdminCommands
             var result = await UserController.ResetAllUserAddsAsync(message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Users Has Been Reset SuccessFully",
-                _ => "Cant Reset Users"
+                0 => "کاربران ریست شدند",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -204,9 +207,9 @@ internal static class AdminCommands
             var result = await GroupController.ResetGroupSettingAsync(message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Group Reset SuccessFully",
-                1 => "Group Is Not Created",
-                _ => "Cant Reset Group!"
+                0 => "تنظیمات گروه ریست شد",
+                1 => "هنوز گروه رو نساختی",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -222,7 +225,7 @@ internal static class AdminCommands
     {
         try
         {
-            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, $"GroupID:[<i>{message.Chat.Id}</i>]", ParseMode.Html, cancellationToken: ct);
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, $"ایدی گروه:[<i>{message.Chat.Id}</i>]", ParseMode.Html, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId));
 
         }
@@ -242,7 +245,7 @@ internal static class AdminCommands
             var isNumber = long.TryParse(message.Text?.Replace("price ", ""), out var price);
             if (!isNumber)
             {
-                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "Price Cannot Be Empty", cancellationToken: ct);
+                var msg1 = await client.SendTextMessageAsync(message.Chat.Id, "قیمت نمیتواند خالی باشد", cancellationToken: ct);
                 RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
 
                 return;
@@ -251,8 +254,8 @@ internal static class AdminCommands
             var result = await GroupController.UpdateGroupAsync(p => p.AddPrice = price, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Price Updated SuccessFully",
-                _ => "Cannot Edit Price"
+                0 => "قیمت اپدیت شد",
+                _ => "نمیشه"
             };
             var msg2 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct).ConfigureAwait(false);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg2.MessageId, validate.MessageDeleteTimeInMinute));
@@ -275,9 +278,9 @@ internal static class AdminCommands
             var result = await GroupController.RemoveGroupAsync(message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Group Removed SuccessFully",
-                1 => "Group Is Not Created!",
-                _ => "Cannot Remove Group!"
+                0 => "گروه حذف شد",
+                1 => "اصن گروه فعال نیست ",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -301,8 +304,8 @@ internal static class AdminCommands
             }, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Bot Updated",
-                _ => "Cannot Update The Bot Status"
+                0 => "بروزرسانی شد",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -327,8 +330,8 @@ internal static class AdminCommands
             }, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Bot Updated",
-                _ => "Cannot Update The Bot."
+                0 => "بروزرسانی شد",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -352,8 +355,8 @@ internal static class AdminCommands
             }, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Notification Has Been Updated",
-                _ => "Cannot Update The Notification Status"
+                0 => "وضعیت اعلان بروزرسانی شد",
+                _ => "نمیشه"
             };
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
             RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
@@ -376,8 +379,8 @@ internal static class AdminCommands
             }, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Fake Detection Updated SuccessFully",
-                _ => "Cannot Change Fake Detection Status"
+                0 => "تشخیص فیک اپدیت شد",
+                _ => "نمیشه"
             };
 
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
@@ -402,8 +405,34 @@ internal static class AdminCommands
             }, message.Chat.Id, ct);
             var response = result switch
             {
-                0 => "Welcome Message Status Updated SuccessFully",
-                _ => "Cannot Change Welcome Message Status "
+                0 => "حله",
+                _ => "نمیشه"
+            };
+
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandWelcomeControlAsync));
+        }
+    }
+    public static async Task CommandSetPayAdminAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.PayAdmin = message.Text?.Replace("payadmin", "") ?? "@.";
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "حله",
+                _ => "نمیشه"
             };
 
             var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);

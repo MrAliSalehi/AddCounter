@@ -8,15 +8,18 @@ namespace AddCounter.Common.Extensions
         {
             if (!File.Exists("logs.txt"))
                 File.Create("logs.txt").Close();
-
-            builder.UseSerilog((_, lc) =>
+            try
             {
-                lc.WriteTo.File(new FileInfo("logs.txt").FullName);
-                if (Globals.Globals.ApplicationEnv.ToLower() == "development")
+                builder.UseSerilog((_, lc) =>
                 {
-                    lc.WriteTo.Console();
-                }
-            });
+                    lc.WriteTo.File(new FileInfo("logs.txt").FullName);
+                });
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, nameof(InjectSerilog));
+            }
             return builder;
         }
     }

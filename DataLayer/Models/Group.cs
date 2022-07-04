@@ -13,4 +13,5 @@ public class Group
     public bool NotifyForAdd { get; set; } = true;
     public bool FakeDetection { get; set; } = false;
     public bool SayWelcome { get; set; } = true;
+    public string PayAdmin { get; set; } = "";
 }

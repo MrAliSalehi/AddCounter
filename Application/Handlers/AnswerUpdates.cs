@@ -12,7 +12,6 @@ namespace AddCounter.Application.Handlers;
 internal static class AnswerUpdates
 {
 
-    //todo payadmin
     internal static async Task HandleMessagesAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
     {
         if (message.Text is null)
@@ -21,7 +20,7 @@ internal static class AnswerUpdates
         if (message.From is null)
             return;
 
-        if (!Globals.Admins.Contains(message.From.Id))
+        if (!Globals.BotConfigs.Admins.Contains(message.From.Id))
             return;
 
         var action = message.Text switch
@@ -42,6 +41,7 @@ internal static class AnswerUpdates
             { } msg when (msg.StartsWith("count")) => client.CommandSetAddCountAsync(message, ct),
             { } msg when (msg.StartsWith("price")) => client.CommandSetAddPriceAsync(message, ct),
             { } msg when (msg.StartsWith("del tm")) => client.CommandSetMessageDeleteTimeAsync(message, ct),
+            { } msg when (msg.StartsWith("payadmin")) => client.CommandSetPayAdminAsync(message, ct),
 
             _ => Task.CompletedTask
         };
@@ -65,7 +65,7 @@ internal static class AnswerUpdates
         {
             var fromName = from.Username is null or "" ? from.FirstName : $"@{from.Username}";
             if (group.HideName)
-                fromName = "USERNAME_IS_HIDDEN";
+                fromName = "نام_مخفی_است";
             var getUser = await UserController.GetUserAsync(from.Id, chatId, ct);
 
             var totalNewAdds = group.FakeDetection ? newUsers.Count(user => !user.IsBot) : newUsers.Length;
@@ -82,11 +82,11 @@ internal static class AnswerUpdates
             var totalPrice = group.AddPrice * totalAdds;
             var response = result switch
             {
-                0 => $"User {fromName} in Group[<i>{chatName}</i>]\n" +
-                    $"You Added <b>{getUser.AddCount}</b> Members Before.\n" +
-                    $"Now You Added <b>{totalNewAdds}</b> More Users\n" +
-                    $"You Need <b>{group.RequiredAddCount - (totalAdds)}</b> More To Get Paid.\n" +
-                    $"Your Total Add Price until now Is [<b>${totalPrice}</b>]",
+                0 => $"کاربر {fromName} در گروه[<i>{chatName}</i>]\n" +
+                    $"شما <b>{getUser.AddCount}</b> نفر را از قبل اد کرده بودید\n" +
+                    $"الان <b>{totalNewAdds}</b> نفر اد کردید\n" +
+                    $"شما به <b>{group.RequiredAddCount - (totalAdds)}</b> نفر دیگر نیاز دارید تا درخاست تسویه بدهید\n" +
+                    $"ارزش کل اد های شما [<b>تومان {totalPrice}</b>] میباشد",
                 _ => "Cant Store Your Data. Please Contact Admins!"
             };
             var msg2 = await client.SendTextMessageAsync(chatId, response, ParseMode.Html, cancellationToken: ct);
