@@ -11,9 +11,8 @@ namespace AddCounter.Application.Handlers;
 
 internal static class AnswerUpdates
 {
-    //todo fake detection
+
     //todo payadmin
-    //todo bulkon -> disable notify message for add 
     internal static async Task HandleMessagesAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
     {
         if (message.Text is null)
@@ -36,6 +35,9 @@ internal static class AnswerUpdates
             "res gp" => client.CommandResetGroupSettingAsync(message, ct),
             "gp id" => client.CommandGroupIdAsync(message, ct),
             "hide name" or "show name" => client.CommandUserNameVisibilityAsync(message, ct),
+            "dis n" or "en n" => client.CommandAddNotificationControlAsync(message, ct),
+            "fake on" or "fake off" => client.CommandFakeDetectionAsync(message, ct),
+            "wlc off" or "wlc on" => client.CommandWelcomeControlAsync(message, ct),
             { } msg when (msg.StartsWith("wlc")) => client.CommandSetWelcomeMessageAsync(message, ct),
             { } msg when (msg.StartsWith("count")) => client.CommandSetAddCountAsync(message, ct),
             { } msg when (msg.StartsWith("price")) => client.CommandSetAddPriceAsync(message, ct),
@@ -54,30 +56,35 @@ internal static class AnswerUpdates
         if (!group.BotStatus)
             return;
 
-        foreach (var user in newUsers)
+        if (group.SayWelcome)
         {
-            var name = user.Username is null or "" ? user.FirstName : $"@{user.Username}";
-            var welcomeMessage = group.WelcomeMessage is null or "" ? "Welcome" : group.WelcomeMessage;
-            var msg1 = await client.SendTextMessageAsync(chatId, $"{name}\n{welcomeMessage}", cancellationToken: ct);
-            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(chatId, msg1.MessageId, group.MessageDeleteTimeInMinute));
+            await client.ActionSayWelcomeAsync(newUsers, group, ct);
         }
+
         if (from is not null && newUsers.All(p => p.Id != from.Id))
         {
             var fromName = from.Username is null or "" ? from.FirstName : $"@{from.Username}";
             if (group.HideName)
                 fromName = "USERNAME_IS_HIDDEN";
             var getUser = await UserController.GetUserAsync(from.Id, chatId, ct);
+
+            var totalNewAdds = group.FakeDetection ? newUsers.Count(user => !user.IsBot) : newUsers.Length;
+
             var result = await UserController.UpdateUserAsync(from.Id, chatId, p =>
             {
-                p.AddCount += Convert.ToUInt32(newUsers.Length);
+                p.AddCount += Convert.ToUInt32(totalNewAdds);
             }, ct);
-            var totalAdds = getUser.AddCount + newUsers.Length;
+
+            if (!group.NotifyForAdd)
+                return;
+
+            var totalAdds = getUser.AddCount + totalNewAdds;
             var totalPrice = group.AddPrice * totalAdds;
             var response = result switch
             {
                 0 => $"User {fromName} in Group[<i>{chatName}</i>]\n" +
                     $"You Added <b>{getUser.AddCount}</b> Members Before.\n" +
-                    $"Now You Added <b>{newUsers.Length}</b> More Users\n" +
+                    $"Now You Added <b>{totalNewAdds}</b> More Users\n" +
                     $"You Need <b>{group.RequiredAddCount - (totalAdds)}</b> More To Get Paid.\n" +
                     $"Your Total Add Price until now Is [<b>${totalPrice}</b>]",
                 _ => "Cant Store Your Data. Please Contact Admins!"

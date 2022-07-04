@@ -339,6 +339,81 @@ internal static class AdminCommands
             Log.Error(e, nameof(CommandBotStateAsync));
         }
     }
+    public static async Task CommandAddNotificationControlAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.NotifyForAdd = message.Text is not "dis n" and "en n";
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Notification Has Been Updated",
+                _ => "Cannot Update The Notification Status"
+            };
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandAddNotificationControlAsync));
+        }
+    }
+    public static async Task CommandFakeDetectionAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.FakeDetection = message.Text is "fake on" or not "fake off";
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Fake Detection Updated SuccessFully",
+                _ => "Cannot Change Fake Detection Status"
+            };
+
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandFakeDetectionAsync));
+        }
+    }
+    public static async Task CommandWelcomeControlAsync(this ITelegramBotClient client, Message message, CancellationToken ct = default)
+    {
+        try
+        {
+            var validate = await ValidateGroupAsync(client, message, ct);
+            if (validate is null)
+                return;
+
+            var result = await GroupController.UpdateGroupAsync(p =>
+            {
+                p.SayWelcome = message.Text is "wlc on" or not "wlc off";
+            }, message.Chat.Id, ct);
+            var response = result switch
+            {
+                0 => "Welcome Message Status Updated SuccessFully",
+                _ => "Cannot Change Welcome Message Status "
+            };
+
+            var msg1 = await client.SendTextMessageAsync(message.Chat.Id, response, cancellationToken: ct);
+            RemoveMessageService.MessagesToRemove.Add(new RemoveMessageModel(message.Chat.Id, msg1.MessageId, validate.MessageDeleteTimeInMinute));
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, nameof(CommandWelcomeControlAsync));
+        }
+    }
     public static async ValueTask<Group?> ValidateGroupAsync(ITelegramBotClient client, Message message, CancellationToken ct = default)
     {
         try

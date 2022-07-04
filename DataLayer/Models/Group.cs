@@ -10,4 +10,7 @@ public class Group
     public ushort MessageDeleteTimeInMinute { get; set; } = 5;
     public bool BotStatus { get; set; } = true;
     public bool HideName { get; set; } = false;
+    public bool NotifyForAdd { get; set; } = true;
+    public bool FakeDetection { get; set; } = false;
+    public bool SayWelcome { get; set; } = true;
 }

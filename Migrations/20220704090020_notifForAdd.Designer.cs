@@ -2,6 +2,7 @@
 using AddCounter.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AddCounter.Migrations
 {
     [DbContext(typeof(CounterContext))]
-    partial class CounterContextModelSnapshot : ModelSnapshot
+    [Migration("20220704090020_notifForAdd")]
+    partial class notifForAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.6");
@@ -28,9 +30,6 @@ namespace AddCounter.Migrations
                     b.Property<bool>("BotStatus")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("FakeDetection")
-                        .HasColumnType("INTEGER");
-
                     b.Property<long>("GroupId")
                         .HasColumnType("INTEGER");
 
@@ -44,9 +43,6 @@ namespace AddCounter.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RequiredAddCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("SayWelcome")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("WelcomeMessage")
